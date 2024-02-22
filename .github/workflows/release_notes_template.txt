@@ -1,4 +1,4 @@
-Minimum bazel version: **6.0.0** (6.1.0 if using blzmod)
+Minimum bazel version: **6.0.0** (6.1.0 if using bzlmod)
 
 If you're using `bzlmod`, add the following to `MODULE.bazel`:
 
