@@ -14,7 +14,7 @@
 
 SUPPORTED_TARGETS = [("linux", "x86_64"), ("linux", "aarch64"), ("darwin", "x86_64"), ("darwin", "aarch64")]
 
-toolchain_tools = [
+_toolchain_tools = [
     "clang-cpp",
     "ld.lld",
     "llvm-ar",
@@ -26,6 +26,12 @@ toolchain_tools = [
     "llvm-objdump",
     "llvm-strip",
 ]
+
+_toolchain_tools_darwin = [
+    "llvm-libtool-darwin",
+]
+
+
 
 def host_os_key(rctx):
     (os, version, arch) = os_version_arch(rctx)
@@ -175,6 +181,12 @@ def attr_dict(attr):
         tuples.append((key, val))
 
     return dict(tuples)
+
+def toolchain_tools(os):
+    tools = list(_toolchain_tools)
+    if os == "darwin":
+        tools.extend(_toolchain_tools_darwin)
+    return tools
 
 def _get_host_tool_info(rctx, tool_path, tool_key = None):
     if tool_key == None:
